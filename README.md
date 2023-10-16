@@ -1,6 +1,5 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Simple_github_ors
+This is the repository for Take-Home Assignment: Frontend Software Engineering from IBM.
 
 ## Available Scripts
 
