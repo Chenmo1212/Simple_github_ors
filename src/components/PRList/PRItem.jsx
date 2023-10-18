@@ -6,7 +6,7 @@ const PRItem = ({title, url, author, authorUrl, comments}) => {
     return (
         <div className="pr-item">
             <div className="pr-item-header">
-                <h3 className="pr-title"><a href={url}>{title || 'Title Not Available'}</a></h3>
+                <h3 className="pr-title" title={title || 'Title Not Available'}><a href={url}>{title || 'Title Not Available'}</a></h3>
                 <p className="pr-author">Author: <a href={authorUrl}>{author || 'Author Not Available'}</a></p>
             </div>
             <p className="pr-item-comment">

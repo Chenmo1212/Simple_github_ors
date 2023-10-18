@@ -8,11 +8,18 @@
     justify-content: space-between;
 }
 
+.pr-item-header {
+    max-width: calc(100% - 30px);
+}
+
 .pr-title {
     font-size: 16px;
     color: #333639;
     transition: text-decoration 0.2s ease-in-out;
     margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pr-title a {
