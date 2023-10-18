@@ -9,13 +9,12 @@
 }
 
 .pr-item-header {
-    max-width: calc(100% - 30px);
+    max-width: calc(100% - 40px);
 }
 
 .pr-title {
     font-size: 16px;
     color: #333639;
-    transition: text-decoration 0.2s ease-in-out;
     margin: 10px 0;
     white-space: nowrap;
     overflow: hidden;
@@ -24,13 +23,14 @@
 
 .pr-title a {
     color: #333639;
+    transition: all .2s ease-in-out;
     text-decoration: none;
 }
 
 .pr-title a:hover {
-    text-decoration: underline;
     color: #0366d6;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .pr-author {
@@ -41,13 +41,14 @@
 
 .pr-author a {
     color: #586069;
+    transition: all .2s ease-in-out;
     text-decoration: none;
 }
 
 .pr-author a:hover {
-    text-decoration: underline;
     color: #0366d6;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .pr-item-comment {
