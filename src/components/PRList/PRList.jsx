@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchPullRequests } from '../../axios/api';
+import { fetchCommentCount, fetchPullRequests } from '../../axios/api';
 import PRItem from "./PRItem";
 import './PRList.css';
 
@@ -8,25 +8,29 @@ const PRList = () => {
 
     useEffect(() => {
         // Fetch PR data from the GitHub API
-        fetchPullRequests()
-            .then((res) => {
-                const prData = res.data.map((pr, index) => ({
-                    id: pr.id || index,
-                    title: pr.title || 'Title Not Available',
-                    url: pr.url || '/',
-                    author: pr.user['login'] || 'Author Not Available',
-                    authorUrl: pr.user['html_url'] || '/',
-                    comments: pr.comments || 0
-                }));
-
-                setPRs(prData);
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-            .finally(() => {
-                console.log("Fetch Pull PR Data Done!")
-            });
+        (async () => {
+            try {
+                const response = await fetchPullRequests();
+                const prData = response.data;
+                const prsWithCommentCountPromises = prData.map(async (pr) => {
+                    const comments = await fetchCommentCount(pr["comments_url"]);
+                    const commentCount = comments.data.length
+                    return {
+                        id: pr.id,
+                        title: pr.title || 'Title Not Available',
+                        url: pr["html_url"] || '/',
+                        author: pr.user["login"] || 'Author Not Available',
+                        authorUrl: pr.user["html_url"] || '/',
+                        commentsUrl: pr["comments_url"] || '/',
+                        comments: commentCount,
+                    };
+                });
+                const prsWithCommentCount = await Promise.all(prsWithCommentCountPromises);
+                setPRs(prsWithCommentCount);
+            } catch (err) {
+                console.error('Error fetching PRs and comment counts:', err);
+            }
+        })();
     }, []);
 
     return (
