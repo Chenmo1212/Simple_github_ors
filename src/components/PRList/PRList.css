@@ -14,10 +14,10 @@
     padding: 16px;
     background-color: #fff;
     border: 1px solid #e1e4e8;
+    border-radius: 6px;
 }
 
 .pr-list li {
-    margin-bottom: 5px;
     border-radius: 6px;
 }
 

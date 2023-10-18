@@ -46,6 +46,7 @@ const PRList = () => {
     // Pagination functions
     const onPageChange = (page) => {
         setPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
