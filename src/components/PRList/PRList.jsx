@@ -22,7 +22,7 @@ const PRList = () => {
                         author: pr.user["login"] || 'Author Not Available',
                         authorUrl: pr.user["html_url"] || '/',
                         commentsUrl: pr["comments_url"] || '/',
-                        comments: commentCount,
+                        comments: commentCount || 0,
                     };
                 });
                 const prsWithCommentCount = await Promise.all(prsWithCommentCountPromises);
@@ -44,7 +44,8 @@ const PRList = () => {
                             author={pr.author}
                             url={pr.url}
                             authorUrl={pr.authorUrl}
-                            comments={pr.comments || 0}
+                            comments={pr.comments}
+                            commentsUrl={pr.commentsUrl}
                         />
                     </li>))
                 }

@@ -6,12 +6,7 @@
 .pr-list h2 {
     font-size: 24px;
     color: #333;
-    margin-bottom: 16px;
-}
-
-.pr-list p {
-    font-size: 16px;
-    color: #586069;
+    margin: 16px;
 }
 
 .pr-list ul {
