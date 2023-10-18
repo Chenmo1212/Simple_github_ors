@@ -1,0 +1,44 @@
+.pr-list {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.pr-list h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.pr-list p {
+    font-size: 16px;
+    color: #586069;
+}
+
+.pr-list ul {
+    list-style: none;
+    padding: 16px;
+    background-color: #fff;
+    border: 1px solid #e1e4e8;
+}
+
+.pr-list li {
+    margin-bottom: 5px;
+    border-radius: 6px;
+}
+
+
+/*@media (max-width: 768px) {*/
+/*    .pr-list {*/
+/*        display: block;*/
+/*    }*/
+
+/*    .pr-list li {*/
+/*        margin-bottom: 20px;*/
+/*    }*/
+/*}*/
+
+@media (min-width: 769px) {
+    .pr-list li {
+        flex: 0 0 calc(33.33% - 20px);
+    }
+}
