@@ -4,13 +4,16 @@ import './Loading.css'
 const LoadingIndicator = () => {
     return (
         <>
-            <div className="typing-indicator">
-                <div className="typing-circle"></div>
-                <div className="typing-circle"></div>
-                <div className="typing-circle"></div>
-                <div className="typing-shadow"></div>
-                <div className="typing-shadow"></div>
-                <div className="typing-shadow"></div>
+            <div className="loading-indicator">
+                <div>
+                    <div className="loading-circle" data-testid="loading-circle"></div>
+                    <div className="loading-circle" data-testid="loading-circle"></div>
+                    <div className="loading-circle" data-testid="loading-circle"></div>
+                    <div className="loading-shadow"></div>
+                    <div className="loading-shadow"></div>
+                    <div className="loading-shadow"></div>
+                </div>
+                <div className="loading-text">Loading...</div>
             </div>
         </>
     );
