@@ -4,7 +4,7 @@ import './Footer.css';
 const Footer = () => {
     return (
         <footer className="footer">
-            <p>© 2023 My GitHub PRs App</p>
+            <p>© 2023 GitHub PRs App.</p>
         </footer>
     );
 };
