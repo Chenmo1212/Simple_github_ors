@@ -59,6 +59,7 @@ const PRList = () => {
             const prData = response.data;
             const prsWithCommentCount = await addCommentCountToPRs(prData);
             setPRs(prsWithCommentCount);
+            setPage(1);
             setTotalPages(calculateTotalPages(response.headers.link));
         } catch (err) {
             handleError(err);
@@ -77,6 +78,10 @@ const PRList = () => {
         } else {
             setError('Failed to fetch PR data.');
         }
+        const timer = setTimeout(() => {
+            setError(null);
+            clearTimeout(timer);
+        }, 3000);
     };
 
     const setLoadingIndicator = () => {
@@ -114,7 +119,6 @@ const PRList = () => {
 
     const handleRepoChange = (e) => {
         setLoading(true);
-        setPage(1);
         setTotalPages(1);
         setPRs([]);
         const selectedRepo = e.target.value;
