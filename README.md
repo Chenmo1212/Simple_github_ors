@@ -6,8 +6,10 @@ This web application is built using React to display a list of Pull Requests (PR
 - Fetches a list of PRs from the GitHub API.
 - Dynamically renders PRs on a web page.
 - Displays PR titles, authors, and comment counts.
+- Switches users and choose repositories with ease.
 - Responsive design for desktop and mobile screens.
 - Accessibility features for enhanced usability.
+- Keyboard navigation for a smoother user experience.
 
 ## Project Structure
 
@@ -27,39 +29,52 @@ The project's folder structure is organized as follows:
 Follow these steps to run the project locally:
 
 1. Clone the repository to your local machine:
-```bash
-git clone https://github.com/Chenmo1212/Simple_github_prs.git
-```
+
+   ```bash
+   git clone https://github.com/Chenmo1212/Simple_github_prs.git
+   ```
 
 2. Change to the project directory:
-```bash
-cd Simple_github_prs
-```
 
+   ```bash
+   cd Simple_github_prs
+   ```
 3. Install the project dependencies:
-```bash
-npm install
-```
 
+   ```bash
+   npm install
+   ```
 4. Create a GitHub personal access token:
-- Go to your GitHub account settings.
-- Click on "Developer settings" > "Personal access tokens."
-- Generate a token with the required permissions for the app.
+
+   - Go to your GitHub account settings.
+
+   - Click on "Developer settings" > "Personal access tokens."
+
+   - Generate a token with the required permissions for the app.
 
 5. Update the access token:
-- Open `src/axios/fetch.js`.
-- Replace `'YOUR_ACCESS_TOKEN'` with your GitHub personal access token.
+
+   - Open `src/axios/fetch.js`.
+
+   - Replace `'YOUR_ACCESS_TOKEN'` with your GitHub personal access token.
 
 6. Start the development server:
-```
-npm start
-```
 
+   ```bash
+   npm start
+   ```
 7. Open your web browser and visit `http://localhost:3000` to view the app.
 
 ## Accessibility Features
 
-This project follows best practices for web accessibility, including semantic HTML, keyboard navigation, focus styles, and descriptive alt text for images. It has been tested with screen readers to ensure compatibility.
+here are some accessibility features and improvements implemented in the GitHub PRs web app:
+- **Semantic HTML**: All HTML elements are used semantically, such as using ```<button>``` for clickable elements and `<ul>` for lists. This ensures that screen readers and assistive technologies can interpret the content correctly.
+- **Aria-label Attributes**: Aria-label attributes have been added to various elements, providing descriptive labels for components like the pull request list and the user selection input field. This helps screen readers provide context to users. 
+- **Keyboard Navigation**: The app now supports keyboard navigation, allowing users to navigate and interact with the UI using only keyboard inputs. For example, users can navigate through the list of pull requests and switch between pages with keyboard arrow keys. 
+- **Focus Styles**: Proper focus styles are implemented, ensuring that keyboard and screen reader users can clearly identify which element is currently in focus. This helps users navigate through the interface without confusion. 
+- **Alt Text for Images**: Images, including icons and avatars, are accompanied by descriptive alt text. This makes visual content accessible to users who rely on screen readers. 
+- **Pagination Accessibility**: The pagination component includes descriptive aria-label attributes for each page number, making it clear to screen reader users which page they are on and which page they can navigate to. 
+- **Error Handling**: When an error occurs, such as a failed API request, an error message is displayed and automatically removed after a short time. This ensures that users are aware of the issue and the message doesn't clutter the interface.
 
 ## Issues and Contributions
 
