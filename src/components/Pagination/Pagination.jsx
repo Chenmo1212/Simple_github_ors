@@ -42,13 +42,13 @@ const Pagination = ({page, totalPages, onPageChange}) => {
     return (
         <div className="pagination" tabIndex={0} onKeyDown={handleKeyboardNavigation}>
             <button onClick={() => onPageChange(1)}
-                    disabled={page === 1}
+                    disabled={page === 1 || page > totalPages}
                     title="First Page"
                     aria-label="First Page">
                 First
             </button>
             <button onClick={() => onPageChange(page - 1)}
-                    disabled={page === 1}
+                    disabled={page === 1 || page > totalPages}
                     title="Previous Page"
                     aria-label="Previous Page"
             >
@@ -65,14 +65,14 @@ const Pagination = ({page, totalPages, onPageChange}) => {
                 </button>
             ))}
             <button onClick={() => onPageChange(page + 1)}
-                    disabled={page === totalPages}
+                    disabled={page === totalPages || page > totalPages}
                     title="Next Page"
                     aria-label="Next Page"
             >
                 Next &gt;
             </button>
             <button onClick={() => onPageChange(totalPages)}
-                    disabled={page === totalPages}
+                    disabled={page === totalPages || page > totalPages}
                     title="Last Page"
                     aria-label="Last Page">
                 Last

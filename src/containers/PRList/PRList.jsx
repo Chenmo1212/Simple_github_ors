@@ -39,13 +39,13 @@ const calculateTotalPages = (linkHeader) => {
             return parseInt(linkHeader.match(/page=(\d+)>; rel="prev"/)[1]) + 1;
         }
     }
-    return 0;
+    return 1;
 };
 
 const PRList = () => {
     const [prs, setPRs] = useState([]);
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [username, setUsername] = useState('facebook');
@@ -55,7 +55,6 @@ const PRList = () => {
     // Fetch PR data from the GitHub API
     const fetchPRData = async () => {
         try {
-            setPRs([])
             const response = await fetchPullRequests({page, username, selectedRepo});
             const prData = response.data;
             const prsWithCommentCount = await addCommentCountToPRs(prData);
@@ -107,11 +106,17 @@ const PRList = () => {
 
     const handleUsernameChange = (value) => {
         setLoading(true);
+        setPage(1);
+        setTotalPages(1);
+        setPRs([]);
         setUsername(value);
     };
 
     const handleRepoChange = (e) => {
         setLoading(true);
+        setPage(1);
+        setTotalPages(1);
+        setPRs([]);
         const selectedRepo = e.target.value;
         setSelectedRepo(selectedRepo);
     };
