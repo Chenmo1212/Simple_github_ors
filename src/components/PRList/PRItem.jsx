@@ -10,7 +10,7 @@ const PRItem = ({title, url, author, authorUrl, comments, commentsUrl}) => {
                 <a href={commentsUrl}>
                     <p className="pr-item-comment">
                         <img src={commentSvg} className="comment-icon" alt="comment-icon"/>
-                        <span className="comment-amount" title={comments}>
+                        <span className="comment-amount" title={`Comments amount: ${comments}`}>
                             {commentText}
                         </span>
                     </p>
@@ -25,7 +25,7 @@ const PRItem = ({title, url, author, authorUrl, comments, commentsUrl}) => {
                 <h3 className="pr-title" title={title || 'Title Not Available'}>
                     <a href={url}>{title || 'Title Not Available'}</a>
                 </h3>
-                <p className="pr-author">Created by <a href={authorUrl}>{author || 'Author Not Available'}</a></p>
+                <p className="pr-author" title={`Created by: ${author}`}>Created by <a href={authorUrl}>{author || 'Author Not Available'}</a></p>
             </div>
             {renderComments()}
         </div>
