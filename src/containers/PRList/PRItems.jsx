@@ -1,8 +1,9 @@
 import PRItem from "../../components/PRItem/PRItem";
 import React from "react";
+import EmptySvg from "../../components/EmptySvg/EmptySvg";
 
 const PRItems = ({prs}) => {
-    return (
+    return prs.length ? (
         <ul>
             {prs.map((pr) => (
                 <li key={pr.id}>
@@ -17,7 +18,7 @@ const PRItems = ({prs}) => {
                 </li>
             ))}
         </ul>
-    );
+    ) : <EmptySvg message="test"/>;
 };
 
 export default PRItems;

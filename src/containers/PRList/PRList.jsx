@@ -53,17 +53,23 @@ const PRList = () => {
     const [repos, setRepos] = useState([]);
     const [selectedRepo, setSelectedRepo] = useState('react');
 
+    const DELAY_TIME = 500;
+    const EXTRA_LOADING_TIME = 300;
+    const ERROR_REMOVE_TIME = 3000;
+
     // Fetch PR data from the GitHub API
     const fetchPRData = async () => {
         try {
+            setLoading(true);
             const response = await fetchPullRequests({page, username, selectedRepo});
             const prData = response.data;
             const prsWithCommentCount = await addCommentCountToPRs(prData);
             setPRs(prsWithCommentCount);
-            setPage(1);
             setTotalPages(calculateTotalPages(response.headers.link));
         } catch (err) {
             handleError(err);
+            setPRs([]);
+            setTotalPages(1);
         } finally {
             setLoadingIndicator(false);
         }
@@ -82,18 +88,18 @@ const PRList = () => {
         const timer = setTimeout(() => {
             setError(null);
             clearTimeout(timer);
-        }, 3000);
+        }, ERROR_REMOVE_TIME);
     };
 
     const setLoadingIndicator = () => {
         const timeId = setTimeout(() => {
             setLoading(false);
             clearTimeout(timeId);
-        }, 300);
+        }, EXTRA_LOADING_TIME);
     };
 
     useEffect(() => {
-        const delayedFetchPRData = debounce(fetchPRData, 500);
+        const delayedFetchPRData = debounce(fetchPRData, DELAY_TIME);
         delayedFetchPRData();
         return () => {
             delayedFetchPRData.cancel();
@@ -107,11 +113,13 @@ const PRList = () => {
                 .then((res) => {
                     const repoNames = res.data.map((repo) => repo.name);
                     setRepos(repoNames);
+                    setSelectedRepo(repoNames[0])
                 })
                 .catch((err) => {
-                    handleError(err)
+                    handleError(err);
+                    setRepos([]);
                 });
-        }, 500);
+        }, DELAY_TIME);
 
         delayedSearch(username);
 
@@ -121,17 +129,12 @@ const PRList = () => {
     }, [username]);
 
     const handleUsernameChange = (value) => {
-        setLoading(true);
         setPage(1);
-        setTotalPages(1);
-        setPRs([]);
         setUsername(value);
     };
 
     const handleRepoChange = (e) => {
-        setLoading(true);
-        setTotalPages(1);
-        setPRs([]);
+        setPage(1);
         const selectedRepo = e.target.value;
         setSelectedRepo(selectedRepo);
     };

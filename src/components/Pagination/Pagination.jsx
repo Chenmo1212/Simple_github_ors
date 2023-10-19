@@ -39,7 +39,7 @@ const Pagination = ({page, totalPages, onPageChange}) => {
         }
     };
 
-    return (
+    return totalPages === 1 ? "" :
         <div className="pagination" tabIndex={0} onKeyDown={handleKeyboardNavigation}>
             <button onClick={() => onPageChange(1)}
                     disabled={page === 1 || page > totalPages}
@@ -78,8 +78,6 @@ const Pagination = ({page, totalPages, onPageChange}) => {
                 Last
             </button>
         </div>
-
-    );
 };
 
 export default Pagination;
