@@ -6,6 +6,7 @@ import LoadingIndicator from "../../components/Loading/Loading";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PRItems from "./PRItems";
 import PRListHeader from "./PRListHeader";
+import {debounce} from 'lodash';
 
 const PRListContent = ({prs, loading, onPageChange, page, totalPages}) => {
     return (<div className={loading ? "blur" : ""}>
@@ -92,21 +93,31 @@ const PRList = () => {
     };
 
     useEffect(() => {
-        fetchPRData();
+        const delayedFetchPRData = debounce(fetchPRData, 500);
+        delayedFetchPRData();
+        return () => {
+            delayedFetchPRData.cancel();
+        };
     }, [page, selectedRepo, username]);
 
 
     useEffect(() => {
-        if (username) {
-            fetchUserRepos(username)
+        const delayedSearch = debounce((searchTerm) => {
+            fetchUserRepos(searchTerm)
                 .then((res) => {
                     const repoNames = res.data.map((repo) => repo.name);
                     setRepos(repoNames);
                 })
-                .catch((error) => {
-                    console.error('Error fetching user repositories:', error);
+                .catch((err) => {
+                    handleError(err)
                 });
-        }
+        }, 500);
+
+        delayedSearch(username);
+
+        return () => {
+            delayedSearch.cancel();
+        };
     }, [username]);
 
     const handleUsernameChange = (value) => {
