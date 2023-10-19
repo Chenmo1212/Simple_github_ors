@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {fetchCommentCount, fetchPullRequests} from '../../axios/api';
-import PRItem from "./PRItem";
-import Pagination from "./Pagination";
+import PRItem from "../../components/PRItem/PRItem";
+import Pagination from "../../components/Pagination/Pagination";
 import './PRList.css';
-import LoadingIndicator from "../Loading/Loading";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import LoadingIndicator from "../../components/Loading/Loading";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const PRList = () => {
     const [prs, setPRs] = useState([]);
@@ -47,10 +47,14 @@ const PRList = () => {
                     }
                 }
             } catch (err) {
-                if (err.response.status === 401) {
-                    setError("Please check githubToken and try again!");
+                if (err.response) {
+                    if (err.response.status === 401) {
+                        setError("Please check githubToken and try again!");
+                    } else {
+                        setError(err.response.data.message);
+                    }
                 } else {
-                    setError(err.response.data.message);
+                    setError('Failed to fetch PR data.');
                 }
             } finally {
                 const timeId = setTimeout(() => {
@@ -61,20 +65,6 @@ const PRList = () => {
         })();
     }, [page]);
 
-    // Bind keyboard event to control navigation
-    useEffect(() => {
-        const handleKeyboardNavigation = (event) => {
-            if (event.key === 'ArrowLeft' && page > 1) {
-                onPageChange(page - 1);
-            } else if (event.key === 'ArrowRight' && page < totalPages) {
-                onPageChange(page + 1);
-            }
-        };
-
-        document.addEventListener('keydown', handleKeyboardNavigation);
-        return () => document.removeEventListener('keydown', handleKeyboardNavigation);
-    }, [page, totalPages]);
-
     // Pagination functions
     const onPageChange = (page) => {
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -83,7 +73,7 @@ const PRList = () => {
     };
 
     return (
-        <div className="pr-list">
+        <div className="pr-list" role="region"  aria-label="Pull Requests List">
             <h2>Pull Requests</h2>
             {loading && <LoadingIndicator/>}
             {error && <ErrorMessage message={error}/>}
