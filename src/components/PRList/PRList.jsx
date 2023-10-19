@@ -13,8 +13,8 @@ const PRList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Fetch PR data from the GitHub API
     useEffect(() => {
-        // Fetch PR data from the GitHub API
         (async () => {
             try {
                 const response = await fetchPullRequests(page);
@@ -60,6 +60,20 @@ const PRList = () => {
             }
         })();
     }, [page]);
+
+    // Bind keyboard event to control navigation
+    useEffect(() => {
+        const handleKeyboardNavigation = (event) => {
+            if (event.key === 'ArrowLeft' && page > 1) {
+                onPageChange(page - 1);
+            } else if (event.key === 'ArrowRight' && page < totalPages) {
+                onPageChange(page + 1);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyboardNavigation);
+        return () => document.removeEventListener('keydown', handleKeyboardNavigation);
+    }, [page, totalPages]);
 
     // Pagination functions
     const onPageChange = (page) => {
