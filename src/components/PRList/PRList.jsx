@@ -47,8 +47,11 @@ const PRList = () => {
                     }
                 }
             } catch (err) {
-                console.error('Error fetching PRs and comment counts:', err);
-                setError(err);
+                if (err.response.status === 401) {
+                    setError("Please check githubToken and try again!");
+                } else {
+                    setError(err.response.data.message);
+                }
             } finally {
                 const timeId = setTimeout(() => {
                     setLoading(false);
