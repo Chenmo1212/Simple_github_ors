@@ -1,12 +1,18 @@
 .pr-list {
     max-width: 1280px;
     margin: 0 auto;
+    min-height: calc(100vh - 155px);
 }
 
 .pr-list h2 {
     font-size: 24px;
     color: #333;
     margin: 16px;
+}
+
+.pr-list .blur {
+    transition: all .2s ease-in-out;
+    filter: blur(3px);
 }
 
 .pr-list ul {
