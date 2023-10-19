@@ -15,6 +15,7 @@ The project's folder structure is organized as follows:
 
 - `src/`: Contains the source code of the web application.
     - `components/`: Holds React components.
+    - `containers/`: Manages pages in the app.
     - `images/`: Stores images and icons used in the app.
     - `axios`: Manages API requests to the GitHub API.
   - `App.js`: The main component rendering the PR list.

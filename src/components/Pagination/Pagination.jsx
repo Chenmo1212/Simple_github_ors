@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Pagination.css'
 
 const Pagination = ({page, totalPages, onPageChange}) => {
@@ -16,6 +16,20 @@ const Pagination = ({page, totalPages, onPageChange}) => {
     };
 
     const pageNumbers = getPageNumbers();
+
+    // Bind keyboard event to control navigation
+    useEffect(() => {
+        const handleKeyboardNavigation = (event) => {
+            if (event.key === 'ArrowLeft' && page > 1) {
+                onPageChange(page - 1);
+            } else if (event.key === 'ArrowRight' && page < totalPages) {
+                onPageChange(page + 1);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyboardNavigation);
+        return () => document.removeEventListener('keydown', handleKeyboardNavigation);
+    }, [onPageChange, page, totalPages]);
 
     const handleKeyboardNavigation = (event) => {
         if (event.key === 'ArrowLeft' && page > 1) {
