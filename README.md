@@ -1,6 +1,7 @@
 # GitHub PRs Web App
 
 This web application is built using React to display a list of Pull Requests (PRs) fetched from the GitHub API. It offers a responsive and accessible interface to view PRs, including their titles, authors, and comment counts.
+![facebook-react-pc.png](assets/images/facebook-react-pc.png)
 
 ## Features
 - Fetches a list of PRs from the GitHub API.
@@ -75,6 +76,22 @@ here are some accessibility features and improvements implemented in the GitHub 
 - **Alt Text for Images**: Images, including icons and avatars, are accompanied by descriptive alt text. This makes visual content accessible to users who rely on screen readers. 
 - **Pagination Accessibility**: The pagination component includes descriptive aria-label attributes for each page number, making it clear to screen reader users which page they are on and which page they can navigate to. 
 - **Error Handling**: When an error occurs, such as a failed API request, an error message is displayed and automatically removed after a short time. This ensures that users are aware of the issue and the message doesn't clutter the interface.
+
+## Screenshots
+
+![facebook-react-pc.png](assets/images/facebook-react-pc.png)
+<p align="center">PC page screenshots with pull requests data</p>
+
+![facebook-github-pc.png](assets/images/facebook-github-pc.png)
+<p align="center">PC page screenshots without pull requests data</p>
+
+<img src="assets/images/facebook-react-mobile.png" alt="facebook-react-mobile.png" style="zoom:67%; margin: 0 auto;"/>
+
+<p align="center">Mobile page screenshots with pull requests data</p>
+
+<img src="assets/images/facebook-github-mobile.png" alt="facebook-github-mobile.png" style="zoom:67%; margin: auto;" />
+
+<p align="center">Mobile page screenshots without pull requests data</p>
 
 ## Issues and Contributions
 
