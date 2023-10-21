@@ -25,7 +25,7 @@ const addCommentCountToPRs = async (prData) => {
             url: pr.html_url || '/',
             author: pr.user.login || 'Author Not Available',
             authorUrl: pr.user.html_url || '/',
-            commentsUrl: pr.comments_url || '/',
+            commentsUrl: pr.html_url || '/',
             comments: commentCount || 0,
         };
     });
